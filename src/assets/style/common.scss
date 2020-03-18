@@ -1,0 +1,11 @@
+/* 페이지 진입, 진출 중인 상태일 때 */
+.page-enter-active,
+.page-leave-active {
+    transition: 0.05s;
+}
+
+/* 페이지 진입 전, 진출 후 상태일 때 */
+.page-enter,
+.page-leave-to {
+    opacity: 0;
+}
