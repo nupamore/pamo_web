@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import filters from '@/services/filters'
 
 export function Photo(image) {
@@ -11,7 +12,7 @@ export function Photo(image) {
         userId: image.owner_id,
         serverId: image.guild_id,
         fileId: image.file_id,
-        date: image.reg_date,
+        date: dayjs(image.reg_date).format('YYYY-MM-DD'),
         origin: imgUrl,
         thumb: filters.origin2Thumb(imgUrl),
     }

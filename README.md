@@ -1,4 +1,4 @@
-# pamo_Web
+# pamo_web
 
 > vrc.nupa.moe
 

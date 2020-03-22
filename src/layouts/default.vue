@@ -1,26 +1,40 @@
 <template>
-    <div>
-        <nuxt />
-    </div>
+    <el-container>
+        <el-header>
+            <the-top-nav />
+        </el-header>
+        <el-main>
+            <nuxt />
+        </el-main>
+    </el-container>
 </template>
 
-<style>
-html {
-    box-sizing: border-box;
-    font-size: 16px;
-    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-        'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    word-spacing: 1px;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
+<script>
+import TheTopNav from '@/components/TheTopNav'
+export default {
+    middleware: ['init'],
+    components: {
+        TheTopNav,
+    },
+    beforeCreate() {
+        this.$store.dispatch('getUserInfo')
+    },
 }
+</script>
 
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-    margin: 0;
+<style lang="scss">
+html,
+body {
+    font-size: 15px;
+    font-family: 'PingFang TC', 'メイリオ', 'Noto Sans Korean', sans-serif;
+
+    @media screen and (max-width: 768px) {
+        margin: 0;
+        font-size: 10px;
+    }
+}
+.el-container {
+    max-width: 1600px;
+    margin: 0 auto;
 }
 </style>
