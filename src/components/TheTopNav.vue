@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         login() {
-            location.href = 'http://localhost:3001/auth/discord'
+            location.href = 'http://localhost:3003/auth/login'
         },
         logout() {
             this.$store.dispatch('logout')

@@ -3,7 +3,7 @@ import { Photo } from '@/models/photo'
 
 export default {
     async getPhotosList() {
-        const data = await api('GET_IMAGES', {
+        const { data } = await api('GET_IMAGES', {
             route: {
                 guildId: '646589895321845772',
             },

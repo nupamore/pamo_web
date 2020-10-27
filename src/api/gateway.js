@@ -18,5 +18,12 @@ export default async function api(name, option = {}) {
     params = method === 'post' ? params : { params }
 
     const response = await axios[method](uri, params)
-    return response.data
+
+    if (response.data.code != 0) {
+        const error = new Error(response.data.message)
+        error.code = response.data.code
+        throw error
+    }
+
+    return response.data.data
 }
