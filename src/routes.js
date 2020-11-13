@@ -1,10 +1,10 @@
-import Home from './views/Home.vue'
-import About from './views/About.vue'
-import NotFound from './views/NotFound.vue'
+import Home from './pages/Home.vue'
+import Images from './pages/Images.vue'
+import NotFound from './pages/NotFound.vue'
 
 /** @type {import('vue-router').RouterOptions['routes']} */
 export let routes = [
     { path: '/', component: Home, meta: { title: 'Home' } },
-    { path: '/about', component: About, meta: { title: 'About' } },
+    { path: '/images', component: Images, meta: { title: 'Images' } },
     { path: '/:path(.*)', component: NotFound },
 ]
