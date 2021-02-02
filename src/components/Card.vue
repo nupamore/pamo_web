@@ -9,9 +9,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-
-export default defineComponent({
+export default {
     props: {
         thumb: {
             type: String,
@@ -22,5 +20,5 @@ export default defineComponent({
             default: () => '',
         },
     },
-})
+}
 </script>

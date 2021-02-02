@@ -17,13 +17,12 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import Select from './../components/Select.vue'
-import Card from './../components/Card.vue'
-import guildService from './../services/guild'
-import imageService from './../services/image'
+import Select from '~/components/Select.vue'
+import Card from '~/components/Card.vue'
+import guildService from '~/services/guild'
+import imageService from '~/services/image'
 
-export default defineComponent({
+export default {
     components: { Select, Card },
     data: () => ({
         guildId: null,
@@ -41,5 +40,5 @@ export default defineComponent({
             this.uploaders = await imageService.getUploaders(id)
         },
     },
-})
+}
 </script>

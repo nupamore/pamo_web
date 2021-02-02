@@ -25,9 +25,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-
-export default defineComponent({
+export default {
     props: {
         list: {
             type: Array,
@@ -35,5 +33,5 @@ export default defineComponent({
         },
     },
     emits: { changed: null },
-})
+}
 </script>
