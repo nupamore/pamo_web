@@ -1,6 +1,6 @@
 {
   "name": "pamo_web",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -9,12 +9,13 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
-    "nuxt": "^2.14.12"
+    "nuxt": "^2.14.12",
+    "vant": "^2.12.13"
   },
   "devDependencies": {
     "@nuxtjs/composition-api": "^0.19.0",
-    "@nuxtjs/tailwindcss": "^3.4.2",
     "@vue/compiler-sfc": "^3.0.2",
+    "blurhash-wasm": "^0.2.0",
     "cross-env": "^7.0.2",
     "eslint": "^7.13.0",
     "eslint-config-prettier": "^6.15.0",
@@ -22,7 +23,9 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-prettier-vue": "^2.1.1",
     "eslint-plugin-vue": "^7.1.0",
+    "node-sass": "^5.0.0",
     "prettier": "^2.1.2",
+    "sass-loader": "^10",
     "stylelint": "^13.7.2",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-rational-order": "^0.1.2",

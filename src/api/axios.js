@@ -7,13 +7,13 @@ const customAxios = axios.create({
 
 export async function api(option) {
     const res = await customAxios(option)
-    const { code, message, data } = res.data
+    const { code, message } = res.data
 
     if (code) {
         const err = new Error(message)
         err.code = code
         throw err
     } else {
-        return data
+        return res.data
     }
 }

@@ -2,11 +2,17 @@ import { api } from './../api/axios'
 
 export default {
     async getGuilds() {
-        const guilds = await api({ url: '/api/v1/guilds' })
+        const { data } = await api({ url: '/api/v1/guilds' })
 
-        return guilds.map(g => ({
-            value: g.guild_id,
-            label: g.guild_name,
+        return data.map(g => ({
+            id: g.guild_id,
+            name: g.guild_name,
         }))
+    },
+    async getUploaders(guildId) {
+        const { data } = await api({
+            url: `/api/v1/guilds/${guildId}/uploaders`,
+        })
+        return data
     },
 }

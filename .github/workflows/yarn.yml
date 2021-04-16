@@ -1,9 +1,9 @@
 name: yarn
 on:
   push:
-    branches: [ vite ]
+    branches: [ vant ]
   pull_request:
-    branches: [ vite ]
+    branches: [ vant ]
 
 jobs:
   build:

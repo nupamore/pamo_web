@@ -1,14 +1,18 @@
 import { api } from './../api/axios'
+import Image from '@/models/Image'
 
 export default {
-    async getUploaders(guildId) {
-        const uploaders = await api({
-            url: `/api/v1/guilds/${guildId}/uploaders`,
+    async searchImages(guildId, page) {
+        const { data, pageMeta } = await api({
+            url: `/api/v1/guilds/${guildId}/images`,
+            params: {
+                page,
+                size: 8,
+            },
         })
-
-        return uploaders.map(u => ({
-            value: u.id,
-            label: u.name,
-        }))
+        return {
+            images: data.map(i => new Image(i)),
+            pageMeta,
+        }
     },
 }
