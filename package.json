@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "cross-env NODE_ENV=production nuxt build --modern=server",
-    "start": "cross-env NODE_ENV=production nuxt start --modern=server"
+    "build": "nuxt build --modern=server",
+    "start": "nuxt start --modern=server"
   },
   "dependencies": {
-    "axios": "^0.21.0",
+    "@nuxtjs/axios": "^5.13.1",
     "nuxt": "^2.14.12",
     "vant": "^2.12.13"
   },

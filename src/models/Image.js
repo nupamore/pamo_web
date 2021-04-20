@@ -10,7 +10,7 @@ function thumb({ channel_id, file_id, file_name }) {
 }
 
 function avatar({ owner_id, owner_avatar }) {
-    return `https://cdn.discordapp.com/avatars/${owner_id}/${owner_avatar}.png?size=64`
+    return `https://cdn.discordapp.com/avatars/${owner_id}/${owner_avatar}.png?size=40`
 }
 
 export default class Image extends Model {

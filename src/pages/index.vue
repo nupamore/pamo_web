@@ -1,5 +1,18 @@
 <template>
     <div>
-        <a href="http://localhost:3003/auth/login">login</a>
+        <a :href="`${$config.serverUrl}/api/auth/login`">login</a>
     </div>
 </template>
+
+<script>
+export default {
+    async beforeMount() {
+        try {
+            await this.$store.dispatch('getAuth')
+            this.$router.replace('/guild')
+        } catch (e) {
+            console.log(e)
+        }
+    },
+}
+</script>

@@ -20,13 +20,22 @@ module.exports = async () => {
                 },
             ],
         },
-        buildModules: ['@nuxtjs/composition-api'],
-        /**
-         * dir
-         */
         css: ['@/assets/css/global.scss'],
         srcDir: resolve(__dirname, 'src'),
-        plugins: ['@/plugins/vant', '@/plugins/locale.client'],
+        modules: ['@nuxtjs/axios'],
+        buildModules: ['@nuxtjs/composition-api'],
+        plugins: [
+            '@/plugins/axios',
+            '@/plugins/vant',
+            '@/plugins/locale.client',
+            '@/plugins/blurhash.client',
+        ],
         components: true,
+        publicRuntimeConfig: {
+            serverUrl:
+                process.env.NODE_ENV === 'development'
+                    ? 'http://localhost:3003'
+                    : 'https://bot.nupa.moe',
+        },
     }
 }

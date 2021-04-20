@@ -3,14 +3,15 @@
         <van-col v-for="image in images" :key="image.origin" span="12">
             <van-image
                 width="100%"
-                height="18vh"
+                height="130"
                 fit="cover"
-                :src="image.origin"
+                :src="image.thumb"
                 show-loading
+                @click="onImageClick(image.origin)"
             >
-                <!-- <template #loading>
+                <template #loading>
                     <Blur :hash="image.blur" />
-                </template> -->
+                </template>
             </van-image>
         </van-col>
     </van-row>
@@ -21,5 +22,19 @@ export default {
     props: {
         images: Array,
     },
+    methods: {
+        onImageClick(src) {
+            window.open(src)
+        },
+    },
 }
 </script>
+
+<style lang="scss">
+.image-list {
+    .van-image {
+        display: block;
+        cursor: pointer;
+    }
+}
+</style>

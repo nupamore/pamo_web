@@ -1,5 +1,5 @@
 #__nuxt {
-    max-width: 800px;
+    max-width: 420px;
     margin: 0 auto;
 }
 
@@ -7,4 +7,12 @@
     #__nuxt {
         margin: 10vh auto;
     }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
 }

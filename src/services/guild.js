@@ -1,4 +1,4 @@
-import { api } from './../api/axios'
+import { api } from '@/plugins/axios'
 
 export default {
     async getGuilds() {

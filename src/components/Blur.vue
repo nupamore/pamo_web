@@ -1,13 +1,10 @@
 <template>
-    <div>
-        {{ hash }}
-        <!-- <canvas ref="canvas" width="100" height="60" /> -->
+    <div class="blur">
+        <canvas ref="canvas" :width="WIDTH" :height="HEIGHT" />
     </div>
 </template>
 
 <script>
-import * as blurhash from 'blurhash-wasm'
-
 export default {
     props: {
         hash: {
@@ -15,13 +12,28 @@ export default {
             default: () => '',
         },
     },
-    beforeMount() {
-        // const [WIDTH, HEIGHT] = [50, 30]
-        // const pixels = blurhash.decode(this.hash, WIDTH, HEIGHT)
-        // const asClamped = new Uint8ClampedArray(pixels)
-        // const imageData = new ImageData(asClamped, WIDTH, HEIGHT)
-        // const ctx = this.$refs.canvas.getContext('2d')
-        // ctx.putImageData(imageData, 0, 0)
+    data() {
+        return {
+            WIDTH: 50,
+            HEIGHT: 30,
+        }
+    },
+    mounted() {
+        if (!this.hash) return false
+
+        const pixels = this.$blurhash(this.hash, this.WIDTH, this.HEIGHT)
+        const asClamped = new Uint8ClampedArray(pixels)
+        const imageData = new ImageData(asClamped, this.WIDTH, this.HEIGHT)
+        const ctx = this.$refs.canvas.getContext('2d')
+        ctx.putImageData(imageData, 0, 0)
     },
 }
 </script>
+
+<style lang="scss">
+.blur,
+.blur > canvas {
+    width: 100%;
+    height: 100%;
+}
+</style>
