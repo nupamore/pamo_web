@@ -37,5 +37,9 @@ module.exports = async () => {
                     ? 'http://localhost:3003'
                     : 'https://bot.nupa.moe',
         },
+        server: {
+            port: 3000,
+            host: '0.0.0.0',
+        },
     }
 }
