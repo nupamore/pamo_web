@@ -1,5 +1,6 @@
 <template>
     <div>
+        <van-search v-model="searchUploader" placeholder="Uploader name" />
         <ImageList :images="images" />
         <van-pagination v-model="page" :total-items="total" :show-page-size="5">
             <template #prev-text>
@@ -15,28 +16,34 @@
 
 <script>
 import imageService from '~/services/image'
+import { debounce } from 'lodash'
 
 export default {
     data() {
         return {
+            searchUploader: '',
             images: [{}, {}, {}, {}, {}, {}, {}, {}],
             page: 1,
             total: 0,
         }
     },
     watch: {
-        page(val) {
-            this.searchImages(val)
+        searchUploader: debounce(function () {
+            this.searchImages()
+        }, 200),
+        page() {
+            this.searchImages()
         },
     },
     beforeMount() {
-        this.searchImages(1)
+        this.searchImages()
     },
     methods: {
         async searchImages() {
             const { guildId } = this.$route.params
             const { images, pageMeta } = await imageService.searchImages(
                 guildId,
+                this.searchUploader,
                 this.page - 1,
             )
             this.images = images

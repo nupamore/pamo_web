@@ -1,26 +1,26 @@
 import Model from '@/models/Model'
 
-function origin({ channel_id, file_id, file_name }) {
-    return `https://cdn.discordapp.com/attachments/${channel_id}/${file_id}/${file_name}`
+export function origin(channelId, fileId, filename) {
+    return `https://cdn.discordapp.com/attachments/${channelId}/${fileId}/${filename}`
 }
 
-function thumb({ channel_id, file_id, file_name }) {
-    const query = 'width=200&height=120'
-    return `https://media.discordapp.net/attachments/${channel_id}/${file_id}/${file_name}?${query}`
+export function thumb(channelId, fileId, filename) {
+    const query = 'width=400&height=240'
+    return `https://media.discordapp.net/attachments/${channelId}/${fileId}/${filename}?${query}`
 }
 
-function avatar({ owner_id, owner_avatar }) {
-    return `https://cdn.discordapp.com/avatars/${owner_id}/${owner_avatar}.png?size=40`
+export function avatar(userId, avatar) {
+    return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png?size=40`
 }
 
 export default class Image extends Model {
     constructor(_) {
         super()
         this.blur = _.blurhash
-        this.thumb = thumb(_)
-        this.origin = origin(_)
+        this.thumb = thumb(_.channel_id, _.file_id, _.file_name)
+        this.origin = origin(_.channel_id, _.file_id, _.file_name)
         this.owner = _.owner_id
-        this.avatar = avatar(_)
+        this.avatar = avatar(_.owner_id, _.owner_avatar)
         this.date = _.reg_date
     }
 }

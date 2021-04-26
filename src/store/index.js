@@ -16,9 +16,13 @@ export default {
     },
     actions: {
         async getAuth({ commit }) {
-            const { data } = await api({ url: '/api/v1/me' })
-            commit('SET_AUTH', data)
-            return data
+            try {
+                const { data } = await api({ url: '/api/v1/me' })
+                commit('SET_AUTH', data)
+                return data
+            } catch (e) {
+                console.error(e)
+            }
         },
     },
 }

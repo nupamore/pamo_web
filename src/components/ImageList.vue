@@ -3,7 +3,7 @@
         <van-col v-for="image in images" :key="image.origin" span="12">
             <van-image
                 width="100%"
-                height="130"
+                height="110"
                 fit="cover"
                 :src="image.thumb"
                 show-loading
@@ -18,13 +18,18 @@
 </template>
 
 <script>
+import { ImagePreview } from 'vant'
+
 export default {
     props: {
         images: Array,
     },
     methods: {
         onImageClick(src) {
-            window.open(src)
+            ImagePreview({
+                images: [src],
+                closeable: true,
+            })
         },
     },
 }
@@ -32,6 +37,7 @@ export default {
 
 <style lang="scss">
 .image-list {
+    padding: 10px 12px;
     .van-image {
         display: block;
         cursor: pointer;

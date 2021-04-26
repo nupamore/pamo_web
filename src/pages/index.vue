@@ -1,18 +1,12 @@
 <template>
-    <div>
-        <a :href="`${$config.serverUrl}/api/auth/login`">login</a>
-    </div>
+    <div></div>
 </template>
 
 <script>
 export default {
-    async beforeMount() {
-        try {
-            await this.$store.dispatch('getAuth')
-            this.$router.replace('/guild')
-        } catch (e) {
-            console.log(e)
-        }
+    beforeCreate() {
+        const auth = this.$store.getters['auth']
+        if (auth.id) this.$router.replace('/guild')
     },
 }
 </script>
