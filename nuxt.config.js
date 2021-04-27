@@ -6,7 +6,7 @@ module.exports = async () => {
             htmlAttrs: {
                 lang: 'ko',
             },
-            title: 'test',
+            title: 'Pamo_bot',
             meta: [
                 { charset: 'utf-8' },
                 {
@@ -16,9 +16,10 @@ module.exports = async () => {
                 {
                     hid: 'description',
                     name: 'description',
-                    content: 'test',
+                    content: 'Pamo_bot web archive',
                 },
             ],
+            link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
         },
         css: ['@/assets/css/global.scss'],
         srcDir: resolve(__dirname, 'src'),

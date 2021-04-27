@@ -20,7 +20,9 @@ import { avatar } from '@/models/Image'
 
 export default {
     async middleware({ store }) {
-        await store.dispatch('getAuth')
+        if (!store.getters['auth'].id) {
+            await store.dispatch('getAuth')
+        }
     },
     computed: {
         me() {

@@ -13,6 +13,10 @@
                     <Blur :hash="image.blur" />
                 </template>
             </van-image>
+            <div class="description">
+                <span>{{ image.owner && image.owner.name }}</span>
+                <span>{{ image.date && image.date.toLocaleDateString() }}</span>
+            </div>
         </van-col>
     </van-row>
 </template>
@@ -38,9 +42,27 @@ export default {
 <style lang="scss">
 .image-list {
     padding: 10px 12px;
+    .van-col {
+        position: relative;
+        overflow: hidden;
+    }
     .van-image {
         display: block;
         cursor: pointer;
+    }
+    .description {
+        position: absolute;
+        right: 0;
+        bottom: -2px;
+        left: 0;
+        padding: 4px 8px 6px;
+        font-size: 0.6rem;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(2px);
+
+        span:last-child {
+            float: right;
+        }
     }
 }
 </style>

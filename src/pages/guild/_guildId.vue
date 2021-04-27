@@ -1,6 +1,15 @@
 <template>
-    <div>
-        <van-search v-model="searchUploader" placeholder="Uploader name" />
+    <div id="guild-detail">
+        <van-cell-group>
+            <van-cell :title="guild.name">
+                <template #default>
+                    <van-search
+                        v-model="searchUploader"
+                        placeholder="Uploader name"
+                    />
+                </template>
+            </van-cell>
+        </van-cell-group>
         <ImageList :images="images" />
         <van-pagination v-model="page" :total-items="total" :show-page-size="5">
             <template #prev-text>
@@ -27,6 +36,18 @@ export default {
             total: 0,
         }
     },
+    computed: {
+        guilds() {
+            return this.$store.getters['guilds']
+        },
+        guild() {
+            return (
+                this.guilds.find(g => g.id == this.$route.params.guildId) || {
+                    name: '',
+                }
+            )
+        },
+    },
     watch: {
         searchUploader: debounce(function () {
             this.searchImages()
@@ -36,6 +57,7 @@ export default {
         },
     },
     beforeMount() {
+        if (!this.guilds.length) this.$store.dispatch('getGuilds')
         this.searchImages()
     },
     methods: {
@@ -52,3 +74,14 @@ export default {
     },
 }
 </script>
+
+<style lang="scss">
+#guild-detail {
+    .van-cell__title {
+        line-height: 34px;
+    }
+    .van-search {
+        padding: 0;
+    }
+}
+</style>

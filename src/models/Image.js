@@ -19,8 +19,11 @@ export default class Image extends Model {
         this.blur = _.blurhash
         this.thumb = thumb(_.channel_id, _.file_id, _.file_name)
         this.origin = origin(_.channel_id, _.file_id, _.file_name)
-        this.owner = _.owner_id
-        this.avatar = avatar(_.owner_id, _.owner_avatar)
-        this.date = _.reg_date
+        this.owner = {
+            id: _.owner_id,
+            name: _.owner_name,
+            avatar: avatar(_.owner_id, _.owner_avatar),
+        }
+        this.date = new Date(_.reg_date)
     }
 }

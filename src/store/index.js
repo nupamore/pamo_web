@@ -1,17 +1,25 @@
 import { api } from '@/plugins/axios'
+import Guild from '@/models/Guild'
 
 export default {
     state: () => ({
         auth: {},
+        guilds: [],
     }),
     getters: {
         auth(state) {
             return state.auth
         },
+        guilds(state) {
+            return state.guilds
+        },
     },
     mutations: {
         SET_AUTH(state, obj) {
             state.auth = obj
+        },
+        SET_GUILDS(state, arr) {
+            state.guilds = arr
         },
     },
     actions: {
@@ -23,6 +31,12 @@ export default {
             } catch (e) {
                 console.error(e)
             }
+        },
+        async getGuilds({ commit }) {
+            const { data } = await api({ url: '/api/v1/guilds' })
+            const guilds = data.map(g => new Guild(g))
+            commit('SET_GUILDS', guilds)
+            return guilds
         },
     },
 }

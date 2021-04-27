@@ -7,6 +7,7 @@
                     v-for="g in filterGuilds()"
                     :key="g.id"
                     :value="g.name"
+                    is-link
                     @click="$router.push(`/guild/${g.id}`)"
                 />
             </van-cell-group>
@@ -15,17 +16,19 @@
 </template>
 
 <script>
-import guildService from '~/services/guild'
-
 export default {
     data() {
         return {
-            guilds: [],
             searchGuild: '',
         }
     },
+    computed: {
+        guilds() {
+            return this.$store.getters['guilds']
+        },
+    },
     async beforeMount() {
-        this.guilds = await guildService.getGuilds()
+        if (!this.guilds.length) this.$store.dispatch('getGuilds')
     },
     methods: {
         filterGuilds() {
