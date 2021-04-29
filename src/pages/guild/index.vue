@@ -6,7 +6,7 @@
                 <van-cell
                     v-for="g in filterGuilds()"
                     :key="g.id"
-                    :value="g.name"
+                    :title="g.name"
                     is-link
                     @click="$router.push(`/guild/${g.id}`)"
                 />

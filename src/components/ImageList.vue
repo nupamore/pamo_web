@@ -14,7 +14,7 @@
                 </template>
             </van-image>
             <div class="description">
-                <span>{{ image.owner && image.owner.name }}</span>
+                <span>📷 {{ image.owner && image.owner.name }}</span>
                 <span>{{ image.date && image.date.toLocaleDateString() }}</span>
             </div>
         </van-col>
@@ -57,6 +57,7 @@ export default {
         left: 0;
         padding: 4px 8px 6px;
         font-size: 0.6rem;
+        line-height: 0.8rem;
         background: rgba(255, 255, 255, 0.5);
         backdrop-filter: blur(2px);
 
