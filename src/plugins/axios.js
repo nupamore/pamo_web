@@ -1,4 +1,4 @@
-let axios = null
+export let axios = null
 
 export async function api(option) {
     const res = await axios(option)

@@ -50,6 +50,7 @@ export default {
     },
     watch: {
         searchUploader: debounce(function () {
+            this.page = 1
             this.searchImages()
         }, 200),
         page() {

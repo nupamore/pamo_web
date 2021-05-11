@@ -32,9 +32,10 @@ export default {
                 console.error(e)
             }
         },
-        async getGuilds({ commit }) {
+        async getGuilds({ state, commit }) {
+            const myId = state.auth.id
             const { data } = await api({ url: '/api/v1/guilds' })
-            const guilds = data.map(g => new Guild(g))
+            const guilds = data.map(g => new Guild(g, myId))
             commit('SET_GUILDS', guilds)
             return guilds
         },

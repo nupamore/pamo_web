@@ -15,7 +15,11 @@ FROM node:12-alpine
 ENV APP_HOME=/usr/app
 WORKDIR $APP_HOME
 
-COPY --from=builder . .
+COPY --from=builder .nuxt .nuxt
+COPY --from=builder src src
+COPY --from=builder nuxt.config.js .
+COPY --from=builder package.json .
+COPY --from=builder yarn.lock .
 
 RUN yarn install --production=true
 
