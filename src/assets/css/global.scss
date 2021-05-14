@@ -3,8 +3,16 @@
     margin: 0 auto;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 768px) {
+    body {
+        display: grid;
+        height: 100vh;
+        margin: 0;
+        place-items: center center;
+    }
     #__nuxt {
+        width: 420px;
+        min-height: 700px;
         margin: 10vh auto;
     }
 }
