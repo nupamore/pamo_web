@@ -1,6 +1,11 @@
 <template>
-    <van-row class="image-list">
-        <van-col v-for="image in images" :key="image.origin" span="12">
+    <van-row class="image-list" :class="{ selectable: selectable }">
+        <van-col
+            v-for="image in myImages"
+            :key="image.origin"
+            :class="{ selected: image.selected }"
+            span="12"
+        >
             <van-image
                 width="100%"
                 height="110"
@@ -28,9 +33,7 @@
         <!-- video -->
         <van-overlay :show="video != ''" @click="video = ''">
             <div class="overlay">
-                <video :src="video" controls @click.stop>
-                    <source :src="overlay" />
-                </video>
+                <video :src="`${video}#t=0.001`" controls @click.stop />
             </div>
         </van-overlay>
     </van-row>
@@ -42,14 +45,31 @@ import { ImagePreview } from 'vant'
 export default {
     props: {
         images: Array,
+        selectable: Boolean,
     },
     data() {
         return {
             video: '',
+            myImages: [],
         }
+    },
+    watch: {
+        images(val) {
+            this.myImages = val
+        },
+        selectable() {
+            this.myImages = this.myImages.map(img => ({
+                ...img,
+                selected: false,
+            }))
+        },
     },
     methods: {
         onImageClick(image) {
+            if (this.selectable) {
+                image.selected = !image.selected
+                return
+            }
             if (image.type === 'video') {
                 this.video = image.origin
             } else {
@@ -68,7 +88,6 @@ export default {
     padding: 10px 12px;
     .van-col {
         position: relative;
-        overflow: hidden;
     }
     .van-image {
         display: block;
@@ -77,9 +96,9 @@ export default {
     .description {
         position: absolute;
         right: 0;
-        bottom: -2px;
+        bottom: 0;
         left: 0;
-        padding: 4px 8px 6px;
+        padding: 4px 8px;
         font-size: 0.6rem;
         line-height: 0.8rem;
         background: rgba(255, 255, 255, 0.5);
@@ -107,6 +126,27 @@ export default {
         height: 100%;
         video {
             max-width: 100%;
+        }
+    }
+}
+.image-list.selectable {
+    .van-col {
+        filter: brightness(0.5);
+    }
+    .van-col.selected {
+        position: relative;
+        filter: none;
+        &:after {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            z-index: 1;
+            box-sizing: border-box;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            border: solid 4px #1989fa;
+            content: '';
+            pointer-events: none;
         }
     }
 }

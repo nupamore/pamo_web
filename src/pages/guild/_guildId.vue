@@ -3,14 +3,34 @@
         <van-cell-group>
             <van-cell :title="guild.name">
                 <template #default>
-                    <van-search
-                        v-model="searchUploader"
-                        placeholder="Uploader name"
-                    />
+                    <van-row>
+                        <van-col span="20">
+                            <van-search
+                                v-model="searchUploader"
+                                placeholder="Uploader name"
+                            />
+                        </van-col>
+                        <van-col span="4">
+                            <van-popover
+                                v-model="showConfig"
+                                placement="left"
+                                theme="dark"
+                                trigger="click"
+                                :actions="actions"
+                                @select="execAction"
+                            >
+                                <template #reference>
+                                    <van-icon name="setting-o" size="22" />
+                                </template>
+                            </van-popover>
+                        </van-col>
+                    </van-row>
                 </template>
             </van-cell>
         </van-cell-group>
-        <ImageList :images="images" />
+
+        <ImageList ref="imageList" :images="images" :selectable="showConfig" />
+
         <van-pagination v-model="page" :total-items="total" :show-page-size="5">
             <template #prev-text>
                 <van-icon name="arrow-left" />
@@ -34,6 +54,8 @@ export default {
             images: [{}, {}, {}, {}, {}, {}, {}, {}],
             page: 1,
             total: 0,
+            showConfig: false,
+            actions: [{ id: 'DELETE', text: 'Delete', icon: 'delete-o' }],
         }
     },
     computed: {
@@ -72,6 +94,29 @@ export default {
             this.images = images
             this.total = pageMeta.all
         },
+        execAction(action) {
+            if (action.id === 'DELETE') this.deleteImages()
+        },
+        async deleteImages() {
+            const images = this.$refs.imageList.myImages.filter(
+                img => img.selected,
+            )
+            if (!images.length) {
+                this.$notify({
+                    type: 'danger',
+                    message: 'Not selected any images',
+                })
+                return false
+            }
+
+            this.$dialog
+                .confirm({
+                    message: 'Are you sure you want to delete 3 images?',
+                })
+                .then(() => {
+                    alert()
+                })
+        },
     },
 }
 </script>
@@ -83,6 +128,10 @@ export default {
     }
     .van-search {
         padding: 0;
+    }
+    .van-icon-setting-o {
+        margin: 5px;
+        cursor: pointer;
     }
 }
 </style>
