@@ -20,6 +20,7 @@ export function avatar(userId, avatar) {
 export default class Image extends Model {
     constructor(_) {
         super()
+        this.id = _.file_id
         this.type = /\.(mov|mp4)$/.test(_.file_name) ? 'video' : 'image'
         this.blur = _.blurhash
         this.origin = origin(_.channel_id, _.file_id, _.file_name)

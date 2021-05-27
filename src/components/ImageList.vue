@@ -3,7 +3,7 @@
         <van-col
             v-for="image in myImages"
             :key="image.origin"
-            :class="{ selected: image.selected }"
+            :class="{ deletable: image.deletable, selected: image.selected }"
             span="12"
         >
             <van-image
@@ -67,7 +67,7 @@ export default {
     methods: {
         onImageClick(image) {
             if (this.selectable) {
-                image.selected = !image.selected
+                if (image.deletable) image.selected = !image.selected
                 return
             }
             if (image.type === 'video') {
@@ -130,8 +130,14 @@ export default {
     }
 }
 .image-list.selectable {
-    .van-col {
-        filter: brightness(0.5);
+    .van-col:not(.deletable) {
+        filter: brightness(0.3);
+        .van-image {
+            cursor: not-allowed;
+        }
+    }
+    .van-col.deletable {
+        filter: opacity(0.5);
     }
     .van-col.selected {
         position: relative;

@@ -16,6 +16,7 @@
                                 placement="left"
                                 theme="dark"
                                 trigger="click"
+                                :close-on-click-outside="false"
                                 :actions="actions"
                                 @select="execAction"
                             >
@@ -59,6 +60,9 @@ export default {
         }
     },
     computed: {
+        auth() {
+            return this.$store.getters['auth']
+        },
         guilds() {
             return this.$store.getters['guilds']
         },
@@ -73,34 +77,40 @@ export default {
     watch: {
         searchUploader: debounce(function () {
             this.page = 1
-            this.searchImages()
+            this.search()
         }, 200),
         page() {
-            this.searchImages()
+            this.search()
         },
     },
     beforeMount() {
         if (!this.guilds.length) this.$store.dispatch('getGuilds')
-        this.searchImages()
+        this.search()
     },
     methods: {
-        async searchImages() {
+        async search(nocache) {
             const { guildId } = this.$route.params
-            const { images, pageMeta } = await imageService.searchImages(
+            const { images, pageMeta } = await imageService.search(
                 guildId,
                 this.searchUploader,
                 this.page - 1,
+                nocache,
             )
-            this.images = images
+            this.images = images.map(img => ({
+                ...img,
+                deletable: this.guild.isMaster || this.auth.id == img.owner.id,
+            }))
             this.total = pageMeta.all
         },
         execAction(action) {
             if (action.id === 'DELETE') this.deleteImages()
         },
         async deleteImages() {
+            const { guildId } = this.$route.params
             const images = this.$refs.imageList.myImages.filter(
                 img => img.selected,
             )
+            // not selected
             if (!images.length) {
                 this.$notify({
                     type: 'danger',
@@ -108,14 +118,28 @@ export default {
                 })
                 return false
             }
+            // not confirm
+            try {
+                await this.$dialog.confirm({
+                    message: `Are you sure you want to delete ${images.length} images?`,
+                })
+            } catch (e) {
+                return false
+            }
 
-            this.$dialog
-                .confirm({
-                    message: 'Are you sure you want to delete 3 images?',
+            try {
+                await imageService.delete(guildId, images)
+                this.$notify({
+                    type: 'success',
+                    message: `Deleted ${images.length} images`,
                 })
-                .then(() => {
-                    alert()
+                this.search(true)
+            } catch (e) {
+                this.$notify({
+                    type: 'danger',
+                    message: 'Delete fail',
                 })
+            }
         },
     },
 }
