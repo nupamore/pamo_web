@@ -32,7 +32,7 @@
 
         <ImageList ref="imageList" :images="images" :selectable="showConfig" />
 
-        <van-pagination v-model="page" :total-items="total" :show-page-size="5">
+        <van-pagination v-model="page" :total-items="total" :items-per-page="8">
             <template #prev-text>
                 <van-icon name="arrow-left" />
             </template>
