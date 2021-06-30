@@ -1,36 +1,33 @@
 {
-    "name": "pamo_web",
-    "version": "0.0.1",
-    "private": true,
-    "scripts": {
-        "dev": "nuxt",
-        "build": "nuxt build --modern=server",
-        "start": "nuxt start --modern=server"
-    },
-    "dependencies": {
-        "@nuxtjs/axios": "^5.13.1",
-        "@nuxtjs/composition-api": "^0.19.0",
-        "blurhash-wasm": "^0.2.0",
-        "lodash": "^4.17.21",
-        "nuxt": "^2.14.12",
-        "vant": "^2.12.13"
-    },
-    "devDependencies": {
-        "@vue/compiler-sfc": "^3.0.2",
-        "eslint": "^7.13.0",
-        "eslint-config-prettier": "^6.15.0",
-        "eslint-config-prettier-vue": "^1.0.0",
-        "eslint-plugin-prettier": "^3.1.4",
-        "eslint-plugin-prettier-vue": "^2.1.1",
-        "eslint-plugin-vue": "^7.1.0",
-        "node-sass": "^5.0.0",
-        "prettier": "^2.1.2",
-        "sass-loader": "^10",
-        "stylelint": "^13.7.2",
-        "stylelint-config-prettier": "^8.0.2",
-        "stylelint-config-rational-order": "^0.1.2",
-        "stylelint-config-recommended": "^3.0.0",
-        "stylelint-order": "^4.1.0",
-        "stylelint-prettier": "^1.1.2"
-    }
+  "name": "pamo_web",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "antd": "^4.16.6",
+    "next": "latest",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.21",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-typescript-prettier": "^4.2.0",
+    "eslint-config-next": "^11.0.1",
+    "prettier": "^2.3.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-recommended": "^5.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-prettier": "^1.2.0",
+    "typescript": "^4.3.4"
+  },
+  "license": "MIT"
 }

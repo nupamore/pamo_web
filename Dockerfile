@@ -1,5 +1,5 @@
 # Build Stage
-FROM node:12-alpine AS builder
+FROM node:14-alpine AS builder
 
 COPY . .
 
@@ -15,9 +15,9 @@ FROM node:12-alpine
 ENV APP_HOME=/usr/app
 WORKDIR $APP_HOME
 
-COPY --from=builder .nuxt .nuxt
-COPY --from=builder src src
-COPY --from=builder nuxt.config.js .
+COPY --from=builder .next .next
+COPY --from=builder public public
+COPY --from=builder next.config.js .
 COPY --from=builder package.json .
 COPY --from=builder yarn.lock .
 
